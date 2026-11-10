@@ -1,0 +1,10 @@
+{
+  "name": "fieldnotes",
+  "owner": { "name": "HTML Fieldnotes" },
+  "plugins": [
+    {
+      "name": "html-fieldnotes",
+      "source": "./plugins/html-fieldnotes"
+    }
+  ]
+}

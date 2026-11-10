@@ -1,0 +1,70 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small collection of HTML experiments, published with GitHub Pages.">
+  <title>HTML Fieldnotes</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="wordmark" href="./"><span class="mark" aria-hidden="true">✳</span> HTML Fieldnotes</a>
+    <a class="small-link" href="https://github.com/snirye/html-pages-template">Starter repository <span aria-hidden="true">↗</span></a>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow">The HTML collection</p>
+      <h1>Small pages.<br><em>Big ideas.</em></h1>
+      <p class="lede">Explore published HTML pages by topic. Open a folder to see the pages inside.</p>
+    </section>
+    <section aria-labelledby="folders">
+      <div class="section-heading">
+        <h2 id="folders">Browse folders</h2>
+      </div>
+      {% assign html_files = site.static_files | where: "extname", ".html" | sort: "path" %}
+      {% assign folders = html_files | group_by_exp: "file", "file.path | remove_first: '/' | split: '/' | first" %}
+      <div class="folders">
+        {% for folder in folders %}
+          {% assign root_file = folder.name | prepend: "/" %}
+          {% if folder.items.first.path == root_file %}{% continue %}{% endif %}
+          {% case folder.name %}
+            {% when "design-docs" %}{% assign folder_title = "Design Documents" %}
+            {% when "demos" %}{% assign folder_title = "Website Demos" %}
+            {% else %}{% assign folder_title = folder.name | replace: "-", " " | replace: "_", " " %}
+          {% endcase %}
+          <details class="folder">
+            <summary>
+              <span class="folder-heading">
+                <span class="folder-title">{{ folder_title | escape }}</span>
+                <span class="folder-toggle" aria-hidden="true"></span>
+              </span>
+            </summary>
+            <ul class="folder-pages">
+              {% for file in folder.items %}
+                {% assign path = file.path %}
+                {% assign title = file.basename %}
+                {% if file.name == "index.html" %}
+                  {% assign parts = path | split: "/" | pop %}
+                  {% assign path = parts | join: "/" | append: "/" %}
+                  {% assign title = parts.last %}
+                {% endif %}
+                {% if file.path == "/design-docs/quiet-coast/index.html" %}{% assign title = "The Quiet Coast" %}{% endif %}
+                {% assign href = path | cgi_escape | replace: "%2F", "/" | replace: "+", "%20" | prepend: "." %}
+                <li><a href="{{ href | escape }}">{{ title | replace: "-", " " | replace: "_", " " | escape }}</a></li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer wrap">
+    <span>HTML Fieldnotes</span>
+    <span>Published with GitHub Pages</span>
+  </footer>
+</body>
+</html>

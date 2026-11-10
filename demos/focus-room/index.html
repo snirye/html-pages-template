@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple timer for focused work and short breaks.">
+  <title>Focus Room | HTML Fieldnotes</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script src="./timer.js" defer></script>
+</head>
+<body class="focus">
+  <header class="site-header wrap">
+    <a class="wordmark" href="../../"><span class="mark" aria-hidden="true">✳</span> HTML Fieldnotes</a>
+    <a class="small-link" href="../../"><span aria-hidden="true">←</span> All samples</a>
+  </header>
+  <main class="wrap focus-main">
+    <section class="focus-panel" aria-labelledby="focus-title">
+      <p class="eyebrow">02 / Website Demos</p>
+      <h1 id="focus-title">Focus <em>Room</em></h1>
+      <p class="lede">Pick a session, choose one task, and start the clock.</p>
+      <noscript><p>Enable JavaScript to use the timer.</p></noscript>
+      <div id="timer-controls" hidden>
+        <div class="mode-switch" role="group" aria-label="Session type">
+          <button type="button" data-minutes="25" aria-pressed="true">Focus · 25 min</button>
+          <button type="button" data-minutes="5" aria-pressed="false">Break · 5 min</button>
+        </div>
+        <div id="countdown" class="dial" role="timer" aria-label="Time remaining">25:00</div>
+        <div class="timer-actions">
+          <button type="button" id="toggle-timer">Start</button>
+          <button type="button" id="reset-timer">Reset</button>
+        </div>
+        <p id="timer-status" class="timer-status" role="status"></p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer wrap">
+    <span>HTML Fieldnotes</span>
+    <a class="small-link" href="../../design-docs/quiet-coast/"><span aria-hidden="true">←</span> The Quiet Coast</a>
+  </footer>
+</body>
+</html>
